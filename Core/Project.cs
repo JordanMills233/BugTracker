@@ -16,7 +16,6 @@ namespace Core
         public string? ProjectDescription { get; set; }
 
         //naviation property for ef core
-        public Issue ?Issue { get; set; }
-
+        public List<Issue>? Issues { get; set; }
     }
 }

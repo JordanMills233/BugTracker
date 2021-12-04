@@ -1,0 +1,54 @@
+﻿@page "/addproject"
+
+@inject IAddProjectUseCase AddProjectUseCase
+@inject NavigationManager NavigationManager
+
+
+<h3>Add Project</h3>
+<br />
+
+@if (project != null)
+{
+    <EditForm Model="project" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="project.ProjectName" class="form-control"></InputText>
+        </div>
+        <br />
+        <div class="form-group">
+            <label for="description">Description</label>
+            <InputText id="description" @bind-Value="project.ProjectDescription" class="form-control"></InputText>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-danger" @onclick="OnCancel">Cancel</button>
+    </EditForm>
+
+}
+
+
+@code {
+    private Project project;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        project = new Project();
+    }
+
+    private void OnValidSubmit()
+    {
+        AddProjectUseCase.Execute(project);
+        NavigationManager.NavigateTo("/projects");
+    }
+
+    private void OnCancel()
+    {
+        NavigationManager.NavigateTo("/projects");
+    }
+
+}

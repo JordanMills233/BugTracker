@@ -1,0 +1,66 @@
+﻿@page "/projects"
+@inject UseCases.IViewProjectUseCase ViewProjectsUseCase
+@inject NavigationManager NavigationManager
+
+<h3 class="b">Projects</h3>
+
+@if (projects != null)
+{
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Issues</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in projects)
+            {
+                <tr>
+                    <td>@project.ProjectName</td>
+
+                    <td>@project.ProjectDescription</td>
+
+                    <td>
+                        <button type="button" class="btn btn-danger">Issues</button>
+                    </td>
+
+                    <td>
+                        <button type="button" @onclick="@(() => EditProject(project))" class="btn btn-link">Edit</button>             
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<br />
+<button type="button" @onclick="OnClickAddProject" class="btn btn-primary">Add Project</button>
+
+@code {
+    private List<Project> projects;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        LoadProjects();
+    }
+
+    private void OnClickAddProject()
+    {
+        NavigationManager.NavigateTo("/addproject");
+    }
+
+    private void EditProject(Project project)
+    {
+        NavigationManager.NavigateTo($"/editproject/{project.ProjectId}");
+    }
+
+    private void LoadProjects()
+    {
+        projects = ViewProjectsUseCase.Execute()?.ToList();
+    }
+}

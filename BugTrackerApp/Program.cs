@@ -1,6 +1,9 @@
 using BugTrackerApp.Data;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Plugins.DataStore.InMemory;
+using UseCases;
+using UseCases.DataStorePlugInInterfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+// Dependency Injection for In-Memory Data Storage
+builder.Services.AddScoped<IProjectRepository, ProjectInMemoryRepository>();
+
+//Dependency Injection for Use Cases and Repositories
+builder.Services.AddTransient<IViewProjectUseCase, ViewProjectUseCase>();
+builder.Services.AddTransient<IAddProjectUseCase, AddProjectUseCase>();
+builder.Services.AddTransient<IGetProjectByIdUseCase, GetProjectByIdUseCase>();
+builder.Services.AddTransient<IEditProjectUseCase, EditProjectUseCase>();
 
 var app = builder.Build();
 
