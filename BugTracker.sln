@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugins.DataStore.InMemory", "Plugins.DataStore.InMemory\Plugins.DataStore.InMemory.csproj", "{4057C7F4-4367-42BC-AA2E-FADECCA445E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{403FF378-9F29-4554-8C5F-0A9E18E1DAAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4057C7F4-4367-42BC-AA2E-FADECCA445E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4057C7F4-4367-42BC-AA2E-FADECCA445E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4057C7F4-4367-42BC-AA2E-FADECCA445E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{403FF378-9F29-4554-8C5F-0A9E18E1DAAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{403FF378-9F29-4554-8C5F-0A9E18E1DAAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{403FF378-9F29-4554-8C5F-0A9E18E1DAAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{403FF378-9F29-4554-8C5F-0A9E18E1DAAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

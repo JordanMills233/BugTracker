@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Extensions;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,35 +8,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Extensions;
 
 namespace Core
 {
-    public class Project
+    public class Company
     {
         public int Id { get; set; }
 
-        [DisplayName("Company")]
-        public int CompanyId { get; set; }
-
         [Required]
         [StringLength(50)]
-        [DisplayName("Project Name")]
+        [DisplayName("Company Name")]
         public string Name { get; set; }
 
         [DisplayName("Description")]
         public string Description { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayName("Start Date")]
-        public DateTimeOffset StartDate { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayName("End Date")]
-        public DateTimeOffset EndDate { get; set; }
-
-        [DisplayName("Priority")]
-        public int? ProjectPriorityId { get; set; }
 
         [Display(Name = "Select Image")]
         [NotMapped]
@@ -51,10 +37,11 @@ namespace Core
         [DisplayName("File Extension")]
         public string FileContentType { get; set; }
 
-        [DisplayName("Archived")]
-        public bool Archived { get; set; }
+        //add new HashSet because if it returns null  you will get an object reference error, but new HashSet makes it so this doesn't break the code if the count is 0
 
-        public virtual Company Company { get; set; }
-        public virtual ProjectPriority ProjectPriority { get; set; }
+        //public virtual ICollection<BTUser> Members { get; set; } = new HashSet<BTUser>();
+        public virtual ICollection<Project> Projects { get; set; } = new HashSet<Project>();
+        //public virtual ICollection<Invite> Invites { get; set; } = new HashSet<Invite>();
+
     }
 }

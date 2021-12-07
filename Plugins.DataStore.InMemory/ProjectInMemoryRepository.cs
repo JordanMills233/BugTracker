@@ -13,23 +13,23 @@ namespace Plugins.DataStore.InMemory
 
             projects = new List<Project>()
             {
-                new Project { ProjectId = 1,  ProjectDescription = "Test Project", ProjectName = "Test Project", },
-                new Project { ProjectId = 2,  ProjectDescription = "Test Project 2", ProjectName = "Test Project 2", }
+                new Project { Id = 1, Description  = "Test Project 1", Name = "Test Project 1", StartDate = DateTime.UtcNow, EndDate = DateTime.UtcNow, CompanyId = 1, ProjectPriorityId = 1},
+                new Project { Id = 2,  Description = "Test Project 2", Name = "Test Project 2", StartDate = DateTime.Now, EndDate = DateTime.Today, CompanyId = 1, ProjectPriorityId = 1}
             };
         }
 
         public void AddProject(Project project)
         {
-            if (projects.Any(x => x.ProjectName.Equals(project.ProjectName, StringComparison.OrdinalIgnoreCase))) return;
+            if (projects.Any(x => x.Name.Equals(project.Name, StringComparison.OrdinalIgnoreCase))) return;
 
             if(projects != null && projects.Count > 0)
             {
-                var maxId = projects.Max(x => x.ProjectId);
-                project.ProjectId = maxId + 1;
+                var maxId = projects.Max(x => x.Id);
+                project.Id = maxId + 1;
             }
             else
             {
-                project.ProjectId = 1;
+                project.Id = 1;
             }
 
             projects.Add(project);
@@ -37,7 +37,7 @@ namespace Plugins.DataStore.InMemory
 
         public Project GetProjectById(int ProjectId)
         {
-            return projects?.FirstOrDefault(x => x.ProjectId == ProjectId);
+            return projects?.FirstOrDefault(x => x.Id == ProjectId);
         }
 
         public IEnumerable<Project> GetProjects()
@@ -47,11 +47,11 @@ namespace Plugins.DataStore.InMemory
 
         public void UpdateProject(Project project)
         {
-            var projectToUpdate = GetProjectById(project.ProjectId);
+            var projectToUpdate = GetProjectById(project.Id);
             if (projectToUpdate != null) 
             {
-                projectToUpdate.ProjectName = project.ProjectName;
-                projectToUpdate.ProjectDescription = project.ProjectDescription;
+                projectToUpdate.Name = project.Name;
+                projectToUpdate.Description = project.Description;
             }
         }
     }
